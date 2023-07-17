@@ -1,0 +1,45 @@
+.table {
+    margin-left: 16rem;
+}
+
+.table-transition {
+    transition: 0.25s;
+}
+
+.circle {
+    aspect-ratio: 1/1;
+    transition: 0.25s;
+}
+
+.circle:hover {
+    background-color: rgb(29, 183, 58);
+
+}
+
+.today-fit-content {
+    width: fit-content;
+}
+
+.today-fit-content i {
+    font-size: 1.5rem;
+    transition: 0.3s;
+
+}
+
+.today-fit-content i:hover {
+    transform: translate(0, -5px);
+}
+
+.add-task {
+    transition: 0.25s;
+}
+
+.add-task:hover {
+    color: rgb(46, 46, 46);
+    background-color: rgb(236, 236, 236);
+}
+
+.add-task:active {
+    color: rgb(28, 28, 28);
+    background-color: rgb(220, 220, 220);
+}
