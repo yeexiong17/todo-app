@@ -130,7 +130,7 @@ class App extends Component {
       <div>
         <SideNavigation menuOpen={this.state.menuOpen} />
         <TopNavigation menuOpen={this.state.menuOpen} menuClicked={this.menuClicked} />
-        <TodayContent newId={this.state.newId} notes={this.state.notes} menuOpen={this.state.menuOpen} saveData={this.saveData} inputChange={this.inputChange} editNote={this.editNote} deleteNote={this.deleteNote} doneClicked={this.doneClicked} addNote={this.timeChange} timeChange={this.timeChange} />
+        <TodayContent newId={this.state.newId} notes={this.state.notes} menuOpen={this.state.menuOpen} saveData={this.saveData} inputChange={this.inputChange} editNote={this.editNote} deleteNote={this.deleteNote} doneClicked={this.doneClicked} addNote={this.addNote} timeChange={this.timeChange} />
       </div >
     )
   }
