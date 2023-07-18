@@ -1,7 +1,8 @@
 .sidebar-anchor {
     height: fit-content;
+    background-color: rgb(221, 221, 221);
 }
 
-.sidebar-anchor:hover {
-    background-color: rgb(212, 212, 212);
-}
+/* .sidebar-anchor:hover {
+    background-color: rgb(221, 221, 221);
+} */

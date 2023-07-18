@@ -9,12 +9,12 @@ const SideNavigation = ({ menuOpen }) => {
                     Today
                 </p>
             </a>
-            <a href='#' className="sidebar-anchor flex items-center link w-90 pa2 br3 mt3 pointer">
+            {/* <a href='#' className="sidebar-anchor flex items-center link w-90 pa2 br3 mt3 pointer">
                 <i className="ri-calendar-event-line w2 pa0 mr3 f3 green"></i>
                 <p className="black">
                     Upcoming
                 </p>
-            </a>
+            </a> */}
         </div>
     )
 }

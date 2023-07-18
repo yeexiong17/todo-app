@@ -1,20 +1,23 @@
 export const notes = [
     {
         id: 1,
-        message: "Do something 1",
+        message: "Study",
         done: false,
-        time: "7.30 PM"
+        edit: false,
+        time: "10.30 AM"
     },
     {
         id: 2,
-        message: "Do something 2",
+        message: "Lunch",
         done: false,
-        time: "2.30 PM"
+        edit: false,
+        time: "12.30 PM"
     },
     {
         id: 3,
-        message: "Do something 3",
+        message: "Meeting",
         done: false,
-        time: "10.00 AM"
+        edit: false,
+        time: "2.30 PM"
     }
 ]
