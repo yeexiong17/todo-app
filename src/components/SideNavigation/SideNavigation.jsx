@@ -2,7 +2,7 @@ import './SideNavigation.css'
 
 const SideNavigation = ({ menuOpen }) => {
     return (
-        <div className={`${menuOpen ? "flex-l" : "dn"} flex-column items-center fixed bg-near-white h-100 w5`}>
+        <div className={`${menuOpen ? "flex-l" : "dn"} sideNav flex-column items-center fixed bg-near-white h-100 w5`}>
             <a href='#' className="sidebar-anchor flex items-center link mt6 w-90 pa2 br3 pointer">
                 <i className="ri-calendar-line w2 pa0 mr3 f3 purple"></i>
                 <p className="black">
