@@ -1,6 +1,6 @@
 import React from 'react'
 
-const Notes = ({ id, message, done, edit, time, menuOpen, doneClicked, deleteNote, editNote, inputChange, timeChange }) => {
+const Notes = ({ id, message, done, edit, time, doneClicked, deleteNote, editNote, inputChange, timeChange }) => {
 
     return (
         <tr>

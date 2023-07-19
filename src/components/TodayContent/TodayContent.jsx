@@ -18,7 +18,6 @@ const TodayContent = ({ notes, menuOpen, doneClicked, deleteNote, addNote, editN
                                         done={note.done}
                                         edit={note.edit}
                                         time={note.time}
-                                        menuOpen={menuOpen}
                                         doneClicked={doneClicked}
                                         deleteNote={deleteNote}
                                         editNote={editNote}

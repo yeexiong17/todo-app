@@ -7,7 +7,7 @@
     transition: 0.25s;
 }
 
-.circle:hover {
+.circle:active {
     background-color: rgb(29, 183, 58);
 
 }
