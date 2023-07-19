@@ -37,6 +37,7 @@ const TodayContent = ({ notes, menuOpen, doneClicked, deleteNote, addNote, editN
                             <input
                                 className='addTime ml3 pa2 br1 b--black-30'
                                 type="time"
+                                defaultValue="00:00"
                             />
                         </div>
                         <button

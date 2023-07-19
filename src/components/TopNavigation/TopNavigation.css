@@ -2,6 +2,10 @@
     font-family: 'Allura';
 }
 
+.menu-icon {
+    -webkit-tap-highlight-color: transparent;
+}
+
 @font-face {
     font-family: 'Allura';
     src: url(./Allura-Regular.ttf);

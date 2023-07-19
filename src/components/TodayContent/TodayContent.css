@@ -22,7 +22,7 @@
 
 }
 
-.today-fit-content i:hover {
+.today-fit-content i:active {
     transform: translate(0, -5px);
 }
 
