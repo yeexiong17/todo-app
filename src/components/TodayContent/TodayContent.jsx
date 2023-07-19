@@ -29,27 +29,25 @@ const TodayContent = ({ notes, menuOpen, doneClicked, deleteNote, addNote, editN
                             })}
                         </tbody>
                     </table>
-                    <div className={`${menuOpen ? "ml7-ns" : ""}`}>
-                        <div className='flex flex-column flex-row-ns items-center-ns justify-center w-80-l w-100 center silver bt b--black-20 ph3 pv3 pointer'>
-                            <div className='flex items-center'>
-                                <input
-                                    className='addMessage pa2 bn'
-                                    placeholder='Type To Add New Note...'
-                                />
-                                <input
-                                    className='addTime ml3 pa2 br1 b--black-30'
-                                    type="time"
-                                />
-                            </div>
-                            <button
-                                onClick={() => addNote(document.querySelector('.addMessage').value,
-                                    document.querySelector('.addTime').value
-                                )}
-                                className='flex items-center justify-between mr-auto ml3-ns mt2 mt0-ns ph3 pv1 pointer'>
-                                <i className="ri-add-line f3 mr2"></i>
-                                <p>Add</p>
-                            </button>
+                    <div className='flex flex-column flex-row-ns items-center-ns justify-center w-80-l w-100 center silver bt b--black-20 ph3 pv3 pointer'>
+                        <div className='flex items-center'>
+                            <input
+                                className='addMessage pa2 bn'
+                                placeholder='Type To Add New Note...'
+                            />
+                            <input
+                                className='addTime ml3 pa2 br1 b--black-30'
+                                type="time"
+                            />
                         </div>
+                        <button
+                            onClick={() => addNote(document.querySelector('.addMessage').value,
+                                document.querySelector('.addTime').value
+                            )}
+                            className='flex items-center justify-between mr-auto ml3-ns mt2 mt0-ns ph3 pv1 pointer'>
+                            <i className="ri-add-line f3 mr2"></i>
+                            <p>Add</p>
+                        </button>
                     </div>
 
                 </div>
