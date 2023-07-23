@@ -18,6 +18,6 @@ export const notes = [
         message: "Meeting",
         done: false,
         edit: false,
-        time: "2.30 PM"
+        time: "14.30 PM"
     }
 ]

@@ -27,8 +27,9 @@ class App extends Component {
   }
 
   addNote = (msg, time) => {
+    console.log(time)
     let newId = (this.state.notes[this.state.notes.length - 1].id) + 1;
-    const [hours] = time.split(":");
+    const [hours, minutes] = time.split(":");
     const period = hours >= 12 ? "PM" : "AM";
 
     if (msg !== "" && time !== "") {
@@ -40,13 +41,12 @@ class App extends Component {
             message: msg,
             done: false,
             edit: false,
-            time: `${time} ${period}`
+            time: `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes} ${period}`
           }
         ]
       }), () => {
         this.saveData()
         document.querySelector('.addMessage').value = ""
-        document.querySelector('.addTime').value = ""
       })
     }
     else {
@@ -68,13 +68,14 @@ class App extends Component {
   }
 
   timeChange = (e, id) => {
-    const [hours] = e.target.value.split(":");
+    const timeString = `${e.$H}:${e.$m}`;
+    const [hours, minutes] = timeString.split(":");
     const period = hours >= 12 ? "PM" : "AM";
 
     this.setState(prevState => ({
       notes: prevState.notes.map(note => {
         if (note.id === id) {
-          return { ...note, time: `${e.target.value} ${period}` }
+          return { ...note, time: `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes} ${period}` }
         }
         return note
       })

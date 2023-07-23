@@ -1,4 +1,5 @@
 import React from 'react'
+import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 
 const Notes = ({ id, message, done, edit, time, doneClicked, deleteNote, editNote, inputChange, timeChange }) => {
 
@@ -15,7 +16,7 @@ const Notes = ({ id, message, done, edit, time, doneClicked, deleteNote, editNot
                     {edit ?
                         <input
                             onChange={(event) => inputChange(event, id)}
-                            className='pa1'
+                            className='pa1 mb2'
                             placeholder='Type Something here...'>
                         </input> :
 
@@ -24,10 +25,11 @@ const Notes = ({ id, message, done, edit, time, doneClicked, deleteNote, editNot
                     <div className='flex items-center'>
                         {edit ?
                             <div className='flex items-center'>
-                                <input
+                                {/* <input
                                     onChange={(event) => timeChange(event, id)}
                                     className='time pa1 mt1 br1 b--black-30'
-                                    type="time" />
+                                    type="time" /> */}
+                                <TimePicker onChange={value => { timeChange(value, id) }} />
                                 <i className="ri-time-line ml2 f4"></i>
                             </div> :
 
