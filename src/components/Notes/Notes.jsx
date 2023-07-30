@@ -1,7 +1,7 @@
 import React from 'react'
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 
-const Notes = ({ id, message, done, edit, time, doneClicked, deleteNote, editNote, inputChange, timeChange }) => {
+const Notes = ({ id, message, newMsg, done, edit, time, doneClicked, doneEdit, deleteNote, editNote, inputChange, timeChange }) => {
 
     return (
         <tr>
@@ -15,9 +15,9 @@ const Notes = ({ id, message, done, edit, time, doneClicked, deleteNote, editNot
                 <div>
                     {edit ?
                         <input
-                            onChange={(event) => inputChange(event, id)}
+                            onChange={(event) => inputChange(event)}
                             className='pa1 mb2'
-                            placeholder='Type Something here...'>
+                            value={newMsg}>
                         </input> :
 
                         <p className={`${done ? "strike i" : ""} f5`}>{message}</p>
@@ -25,11 +25,7 @@ const Notes = ({ id, message, done, edit, time, doneClicked, deleteNote, editNot
                     <div className='flex items-center'>
                         {edit ?
                             <div className='flex items-center'>
-                                {/* <input
-                                    onChange={(event) => timeChange(event, id)}
-                                    className='time pa1 mt1 br1 b--black-30'
-                                    type="time" /> */}
-                                <TimePicker onChange={value => { timeChange(value, id) }} />
+                                <TimePicker onChange={value => { timeChange(value) }} />
                                 <i className="ri-time-line ml2 f4"></i>
                             </div> :
 
@@ -44,7 +40,7 @@ const Notes = ({ id, message, done, edit, time, doneClicked, deleteNote, editNot
             <td className="pr3 pv3-ns pv2 bt b--black-20">
                 <div className='today-fit-content flex items-center ml-auto'>
                     {edit ?
-                        <i onClick={() => editNote(id)} className="ri-check-line pl3 pointer grow green"></i> :
+                        <i onClick={() => doneEdit(id)} className="ri-check-line pl3 pointer grow green"></i> :
                         (<>
                             <i onClick={() => editNote(id)} className="ri-edit-box-line pl3 pointer grow"></i>
                             <i onClick={() => deleteNote(id)} className="ri-delete-bin-line pl3 pointer grow dark-red"></i>

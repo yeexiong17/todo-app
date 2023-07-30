@@ -10,6 +10,8 @@ class App extends Component {
   constructor() {
     super()
     this.state = {
+      newMsg: "",
+      newTime: "",
       menuOpen: false,
       addNote: false,
       notes: []
@@ -17,44 +19,67 @@ class App extends Component {
   }
 
   componentDidMount() {
+
     if (localStorage.getItem("notes") !== null) {
-      let notes = JSON.parse(localStorage.getItem("notes"))
-      this.setState({ notes: notes })
+      let notes = JSON.parse(localStorage.getItem("notes"));
+      this.setState({ notes: notes });
+    } else {
+      // Use the pre-typed database since localStorage is empty
+      this.setState({ notes: notes });
     }
-    else {
-      this.setState({ notes: notes })
-    }
+
+    this.setState(
+      prevState => ({
+        notes: prevState.notes.map(note => ({
+          ...note,
+          edit: false
+        }))
+      }),
+      () => {
+        this.saveData(); // Call saveData without async/await
+
+        if (localStorage.getItem("notes") !== null) {
+          let notes = JSON.parse(localStorage.getItem("notes"));
+          this.setState({ notes: notes });
+        } else {
+          // Use the pre-typed database since localStorage is empty
+          this.setState({ notes: notes });
+        }
+      }
+    );
   }
 
-  addNote = (msg, time) => {
-    console.log(time)
-    let newId = (this.state.notes[this.state.notes.length - 1].id) + 1;
-    const [hours, minutes] = time.split(":");
-    const period = hours >= 12 ? "PM" : "AM";
+  addNote = () => {
+    if (this.state.newMsg == "" || this.state.newTime == "") {
+      return alert("Please Type Your Note and Time")
+    }
+    else {
+      let newId = this.state.notes.length == 0 ? 1 : (this.state.notes[this.state.notes.length - 1].id) + 1;
 
-    if (msg !== "" && time !== "") {
       this.setState(prevState => ({
         notes: [
           ...prevState.notes,
           {
             id: newId,
-            message: msg,
+            message: this.state.newMsg,
             done: false,
             edit: false,
-            time: `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes} ${period}`
+            time: this.state.newTime
           }
         ]
       }), () => {
         this.saveData()
-        document.querySelector('.addMessage').value = ""
       })
-    }
-    else {
-      alert("Please Type Something")
+
+      this.setState({ newMsg: "" })
+      this.setState({ newTime: "" })
     }
   }
 
   editNote = (id) => {
+    this.setState({ newMsg: "" })
+    this.setState({ newTime: "" })
+
     this.setState(prevState => ({
       notes: prevState.notes.map(note => {
         if (note.id === id) {
@@ -67,30 +92,39 @@ class App extends Component {
     })
   }
 
-  timeChange = (e, id) => {
+  timeChange = (e) => {
     const timeString = `${e.$H}:${e.$m}`;
     const [hours, minutes] = timeString.split(":");
     const period = hours >= 12 ? "PM" : "AM";
 
-    this.setState(prevState => ({
-      notes: prevState.notes.map(note => {
-        if (note.id === id) {
-          return { ...note, time: `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes} ${period}` }
-        }
-        return note
-      })
-    }))
+    this.setState({ newTime: `${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes} ${period}` })
+    console.log(`${hours < 10 ? "0" + hours : hours}:${minutes < 10 ? "0" + minutes : minutes} ${period}`)
   }
 
-  inputChange = (e, id) => {
+  inputChange = (e) => {
+    this.setState({ newMsg: e.target.value })
+    console.log(e.target.value)
+  }
+
+  doneEdit = (id) => {
     this.setState(prevState => ({
       notes: prevState.notes.map(note => {
         if (note.id === id) {
-          return { ...note, message: e.target.value }
+          return {
+            ...note,
+            message: this.state.newMsg == "" ? note.message : this.state.newMsg,
+            time: this.state.newTime == "" ? note.time : this.state.newTime,
+          }
         }
         return note
       })
-    }))
+    }), () => {
+      this.saveData()
+      this.editNote(id)
+    })
+
+    this.setState({ newMsg: "" })
+    this.setState({ newTime: "" })
   }
 
   deleteNote = (id) => {
@@ -102,8 +136,12 @@ class App extends Component {
   }
 
   saveData = () => {
-    let store = JSON.stringify(this.state.notes)
-    localStorage.setItem("notes", store)
+    try {
+      let store = JSON.stringify(this.state.notes);
+      localStorage.setItem("notes", store);
+    } catch (error) {
+      console.error("Error saving data:", error);
+    }
   }
 
   // Add strike to task when the task is done
@@ -130,8 +168,23 @@ class App extends Component {
     return (
       <div>
         <SideNavigation menuOpen={this.state.menuOpen} />
-        <TopNavigation menuOpen={this.state.menuOpen} menuClicked={this.menuClicked} />
-        <TodayContent newId={this.state.newId} notes={this.state.notes} menuOpen={this.state.menuOpen} saveData={this.saveData} inputChange={this.inputChange} editNote={this.editNote} deleteNote={this.deleteNote} doneClicked={this.doneClicked} addNote={this.addNote} timeChange={this.timeChange} />
+
+        <TopNavigation
+          menuOpen={this.state.menuOpen}
+          menuClicked={this.menuClicked} />
+
+        <TodayContent
+          newId={this.state.newId}
+          notes={this.state.notes}
+          menuOpen={this.state.menuOpen}
+          saveData={this.saveData}
+          inputChange={this.inputChange}
+          editNote={this.editNote}
+          deleteNote={this.deleteNote}
+          doneClicked={this.doneClicked}
+          doneEdit={this.doneEdit}
+          addNote={this.addNote}
+          timeChange={this.timeChange} />
       </div >
     )
   }

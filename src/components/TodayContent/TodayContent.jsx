@@ -5,7 +5,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { TimePicker } from '@mui/x-date-pickers/TimePicker'
 
-const TodayContent = ({ notes, menuOpen, doneClicked, deleteNote, addNote, editNote, inputChange, timeChange }) => {
+const TodayContent = ({ notes, menuOpen, addNote, doneClicked, deleteNote, doneEdit, editNote, inputChange, timeChange }) => {
 
     let newTime = "";
 
@@ -22,6 +22,7 @@ const TodayContent = ({ notes, menuOpen, doneClicked, deleteNote, addNote, editN
                                             key={i}
                                             id={note.id}
                                             message={note.message}
+                                            newMsg={note.newMsg}
                                             done={note.done}
                                             edit={note.edit}
                                             time={note.time}
@@ -30,6 +31,7 @@ const TodayContent = ({ notes, menuOpen, doneClicked, deleteNote, addNote, editN
                                             editNote={editNote}
                                             inputChange={inputChange}
                                             timeChange={timeChange}
+                                            doneEdit={doneEdit}
                                         />
                                     )
                                 })}
@@ -40,19 +42,17 @@ const TodayContent = ({ notes, menuOpen, doneClicked, deleteNote, addNote, editN
                                 <input
                                     className='addMessage pa2 bn'
                                     placeholder='Type To Add New Note...'
+                                    onChange={(event) => inputChange(event)}
                                 />
                                 {/* <input
                                     className='addTime ml3 pa2 br1 b--black-30'
                                     type="time"
                                     defaultValue="00:00"
                                 /> */}
-                                <TimePicker onChange={event => { newTime = `${event.$H}:${event.$m}` }} />
+                                <TimePicker onChange={value => { timeChange(value) }} />
                             </div>
                             <button
-                                onClick={() => addNote(
-                                    document.querySelector(".addMessage").value,
-                                    newTime
-                                )}
+                                onClick={() => addNote()}
                                 className='flex items-center justify-between mr-auto ml3-ns mt2 mt0-ns ph3 pv1 pointer'>
                                 <i className="ri-add-line f3 mr2"></i>
                                 <p>Add</p>
